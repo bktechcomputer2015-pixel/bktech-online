@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BKTech Signup</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#1565C0;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+background:#fff;
+padding:25px;
+width:340px;
+border-radius:15px;
+box-shadow:0 0 10px rgba(0,0,0,.2);
+text-align:center;
+}
+
+h2{
+margin-bottom:20px;
+color:#1565C0;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:8px;
+background:#1565C0;
+color:#fff;
+font-size:18px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0d47a1;
+}
+
+a{
+text-decoration:none;
+color:#1565C0;
+font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Create Account</h2>
+
+<input type="text" id="name" placeholder="Full Name">
+
+<input type="email" id="email" placeholder="Email">
+
+<input type="tel" id="mobile" placeholder="Mobile Number">
+
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="signupUser()">Create Account</button>
+
+<br><br>
+
+<a href="login.html">Already have an account? Login</a>
+
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<!-- Firebase Config -->
+<script src="firebase.js"></script>
+
+<!-- Signup Logic -->
+<script src="signup.js"></script>
+
+</body>
+</html>

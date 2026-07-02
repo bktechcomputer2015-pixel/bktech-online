@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BKTech Admin Dashboard</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f5f5f5;
+}
+
+header{
+background:#1565C0;
+color:white;
+padding:18px;
+text-align:center;
+font-size:26px;
+font-weight:bold;
+box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
+
+.container{
+display:flex;
+min-height:100vh;
+}
+
+.sidebar{
+width:260px;
+background:#0D47A1;
+padding:20px;
+}
+
+.sidebar h2{
+color:white;
+text-align:center;
+margin-bottom:20px;
+}
+
+.sidebar a{
+display:block;
+padding:12px;
+margin:8px 0;
+background:#1565C0;
+color:white;
+text-decoration:none;
+border-radius:8px;
+transition:.3s;
+}
+
+.sidebar a:hover{
+background:#1976D2;
+transform:translateX(5px);
+}
+
+.content{
+flex:1;
+padding:20px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:12px;
+text-align:center;
+box-shadow:0 2px 10px rgba(0,0,0,.15);
+}
+
+.card h3{
+color:#1565C0;
+margin-bottom:10px;
+}
+
+.card h1{
+font-size:34px;
+color:#333;
+}
+
+.logout{
+background:#E53935!important;
+}
+
+.logout:hover{
+background:#C62828!important;
+}
+
+@media(max-width:768px){
+.container{flex-direction:column;}
+.sidebar{width:100%;}
+}
+</style>
+</head>
+
+<body>
+
+<header>BKTech Admin Dashboard</header>
+
+<div class="container">
+
+<!-- Sidebar -->
+<div class="sidebar">
+<h2>BKTech</h2>
+
+<a href="students.html">👨‍🎓 Students</a>
+<a href="payments.html">💳 Payments</a>
+<a href="addcourse.html">📚 Add Course</a>
+<a href="courses.html">📖 View Courses</a>
+<a href="addnotice.html">📢 Add Notice</a>
+<a href="notice.html">📋 View Notices</a>
+<a href="notes.html">📄 Notes</a>
+<a href="live.html">🎥 Live Classes</a>
+<a href="quiz.html">📝 Quiz</a>
+<a href="certificate.html">🎓 Certificate</a>
+<a href="profile.html">👤 My Profile</a>
+
+<a href="#" class="logout" onclick="logout()">🚪 Logout</a>
+</div>
+
+<!-- Content -->
+<div class="content">
+
+<h2>Welcome Admin 👋</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Total Students</h3>
+<h1 id="students">0</h1>
+</div>
+
+<div class="card">
+<h3>Total Payments</h3>
+<h1 id="payments">0</h1>
+</div>
+
+<div class="card">
+<h3>Total Courses</h3>
+<h1 id="courses">0</h1>
+</div>
+
+<div class="card">
+<h3>Total Notices</h3>
+<h1 id="notices">0</h1>
+</div>
+
+</div>
+
+<br>
+
+<h2>⚡ Quick Actions</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Add Course</h3>
+<a href="addcourse.html"><button>➕ Add Course</button></a>
+</div>
+
+<div class="card">
+<h3>Add Notice</h3>
+<a href="addnotice.html"><button>📢 Add Notice</button></a>
+</div>
+
+<div class="card">
+<h3>Add Live Class</h3>
+<a href="addlive.html"><button>🎥 Add Live</button></a>
+</div>
+
+<div class="card">
+<h3>View Notices</h3>
+<a href="notice.html"><button>📋 Open</button></a>
+</div>
+
+</div>
+
+<br>
+
+<h2>📊 Recent Activity</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Students</h3>
+<p>Manage registered students</p>
+<a href="students.html"><button>Open</button></a>
+</div>
+
+<div class="card">
+<h3>Payments</h3>
+<p>Check payment records</p>
+<a href="payments.html"><button>Open</button></a>
+</div>
+
+<div class="card">
+<h3>Courses</h3>
+<p>Manage courses</p>
+<a href="courses.html"><button>Open</button></a>
+</div>
+
+<div class="card">
+<h3>Live Classes</h3>
+<p>Manage live classes</p>
+<a href="live.html"><button>Open</button></a>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- Footer -->
+<footer style="text-align:center;padding:20px;background:#1565C0;color:white;margin-top:20px;">
+<h3>BKTech Computer & Library</h3>
+<p>Bhore, Vijayipur Road, Gopalganj, Bihar</p>
+<p>📞 6200287571 | 9504810427</p>
+<p>© 2026 BKTech. All Rights Reserved.</p>
+</footer>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script src="firebase.js"></script>
+
+<script>
+// Counts
+db.collection("students").get().then(s => document.getElementById("students").innerHTML = s.size);
+db.collection("payments").get().then(s => document.getElementById("payments").innerHTML = s.size);
+db.collection("courses").get().then(s => document.getElementById("courses").innerHTML = s.size);
+db.collection("notices").get().then(s => document.getElementById("notices").innerHTML = s.size);
+
+// Logout
+function logout(){
+auth.signOut().then(()=>{
+alert("Logged Out Successfully");
+window.location.href="adminlogin.html";
+});
+}
+</script>
+
+</body>
+</html>
