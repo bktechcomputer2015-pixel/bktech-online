@@ -1,77 +1,48 @@
-db.collection("payments").onSnapshot(function(snapshot){
+function submitPayment(){
 
-const paymentList = document.getElementById("paymentList");
+const name = document.getElementById("name").value.trim();
+const amount = document.getElementById("amount").value.trim();
+const utr = document.getElementById("utr").value.trim();
 
-paymentList.innerHTML = "";
-
-if(snapshot.empty){
-paymentList.innerHTML = "<h3>No Payment Requests Found</h3>";
-return;
+if(name==="" || amount==="" || utr===""){
+    alert("Please fill all fields");
+    return;
 }
 
-snapshot.forEach(function(doc){
+auth.onAuthStateChanged(function(user){
 
-const data = doc.data();
-
-paymentList.innerHTML += `
-
-<div class="card">
-
-<p><b>Student UID:</b> ${data.uid}</p>
-
-<p><b>Amount:</b> ₹${data.amount}</p>
-
-<p><b>UTR:</b> ${data.utr}</p>
-
-<p><b>Status:</b> ${data.status}</p>
-
-<button class="approve" onclick="approvePayment('${doc.id}')">
-Approve
-</button>
-
-<button class="reject" onclick="rejectPayment('${doc.id}')">
-Reject
-</button>
-
-</div>
-
-`;
-
-});
-
-});
-
-function approvePayment(id){
-
-db.collection("payments").doc(id).update({
-
-status:"Approved"
-
-}).then(function(){
-
-db.collection("students").doc(id).update({
-
-courseUnlocked:true
-
-}).then(function(){
-
-alert("✅ Payment Approved & Course Unlocked");
-
-});
-
-});
-
+if(!user){
+    alert("Please login first");
+    window.location.href="login.html";
+    return;
 }
 
-function rejectPayment(id){
+db.collection("payments").add({
 
-db.collection("payments").doc(id).update({
+uid:user.uid,
+name:name,
+amount:amount,
+utr:utr,
+status:"Pending",
+createdAt:new Date()
 
-status:"Rejected"
+})
+.then(function(){
 
-}).then(function(){
+alert("Payment Submitted Successfully!");
 
-alert("❌ Payment Rejected");
+document.getElementById("name").value="";
+document.getElementById("amount").value="";
+document.getElementById("utr").value="";
+
+window.location.href="profile.html";
+
+})
+.catch(function(error){
+
+alert(error.message);
+
+});
 
 });
 
