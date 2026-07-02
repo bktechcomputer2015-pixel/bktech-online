@@ -2,12 +2,13 @@
   "name": "BKTech Online Classes",
   "short_name": "BKTech",
   "description": "BKTech Online Classes - Learn Anytime, Anywhere",
-  "start_url": "./",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#1565C0",
-  "theme_color": "#1565C0",
   "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#1565C0",
+
   "icons": [
     {
       "src": "icons/icon-192.png",
@@ -22,11 +23,21 @@
       "purpose": "any maskable"
     }
   ],
+
   "screenshots": [
     {
       "src": "screenshots/home.png",
       "sizes": "1280x720",
-      "type": "image/png"
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "BKTech Home Screen"
+    },
+    {
+      "src": "screenshots/mobile.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "BKTech Mobile Screen"
     }
   ]
 }
