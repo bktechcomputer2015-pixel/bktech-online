@@ -85,8 +85,7 @@ text-align:center;
 padding:15px;
 }
 </style>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#1565C0">
+
 </head>
 
 <body>
@@ -135,10 +134,14 @@ BKTech Online Classes
 <footer>
 © 2026 BKTech Online Classes
 </footer>
+
 <script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js");
+if ('serviceWorker' in navigator) {
+window.addEventListener('load', function () {
+navigator.serviceWorker.register('./sw.js');
+});
 }
 </script>
+
 </body>
 </html>
