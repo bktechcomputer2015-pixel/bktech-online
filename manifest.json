@@ -1,0 +1,16 @@
+{
+  "name": "BKTech Online Classes",
+  "short_name": "BKTech",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1565C0",
+  "theme_color": "#1565C0",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "qr.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    }
+  ]
+}
