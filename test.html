@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Firebase Test</title>
+</head>
+<body>
+
+<h2>Firebase Test</h2>
+
+<button onclick="test()">Test Firebase</button>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDYJJyTjxp0WyoM97AHQ6tKIPcPy327s",
+  authDomain: "bktech-online-classes.firebaseapp.com",
+  projectId: "bktech-online-classes",
+  storageBucket: "bktech-online-classes.appspot.com",
+  messagingSenderId: "833986568289",
+  appId: "1:833986568289:web:2dcbf68c4d3d32cf650a20"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+function test(){
+  alert("Firebase Loaded ✔");
+}
+</script>
+
+</body>
+</html>

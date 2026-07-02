@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BKTech Admin Dashboard</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f5f5f5;
+}
+
+header{
+background:#1565C0;
+color:#fff;
+padding:15px;
+font-size:24px;
+font-weight:bold;
+text-align:center;
+}
+
+.container{
+display:flex;
+min-height:100vh;
+}
+
+.sidebar{
+width:230px;
+background:#0D47A1;
+color:#fff;
+padding:20px;
+}
+
+.sidebar h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+.sidebar a{
+display:block;
+color:#fff;
+text-decoration:none;
+padding:12px;
+margin:8px 0;
+border-radius:8px;
+background:rgba(255,255,255,.1);
+}
+
+.sidebar a:hover{
+background:#1565C0;
+}
+
+.content{
+flex:1;
+padding:20px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.card{
+background:#fff;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.15);
+text-align:center;
+}
+
+.card h2{
+color:#1565C0;
+margin-bottom:10px;
+}
+
+.logout{
+background:red!important;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+BKTech Admin Dashboard
+</header>
+
+<div class="container">
+
+<div class="sidebar">
+
+<h2>BKTech</h2>
+
+<a href="#">📊 Dashboard</a>
+<a href="#">👨‍🎓 Students</a>
+<a href="#">💳 Payments</a>
+<a href="#">📚 Courses</a>
+<a href="#">📄 Notes</a>
+<a href="#">🎥 Live Classes</a>
+<a href="#" class="logout" onclick="logout()">🚪 Logout</a>
+
+</div>
+
+<div class="content">
+
+<div class="cards">
+
+<div class="card">
+<h2>Students</h2>
+<p id="students">0</p>
+</div>
+
+<div class="card">
+<h2>Payments</h2>
+<p id="payments">0</p>
+</div>
+
+<div class="card">
+<h2>Courses</h2>
+<p>8</p>
+</div>
+
+<div class="card">
+<h2>Live Classes</h2>
+<p>Available</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script src="firebase.js"></script>
+
+<script>
+db.collection("students").get().then(function(snapshot){
+document.getElementById("students").innerHTML=snapshot.size;
+});
+
+db.collection("payments").get().then(function(snapshot){
+document.getElementById("payments").innerHTML=snapshot.size;
+});
+
+function logout(){
+auth.signOut().then(function(){
+window.location.href="adminlogin.html";
+});
+}
+</script>
+
+</body>
+</html>
