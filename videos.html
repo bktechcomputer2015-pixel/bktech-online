@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BKTech Video Class</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f5f5f5;
+}
+
+header{
+background:#1565C0;
+color:white;
+padding:18px;
+text-align:center;
+font-size:24px;
+font-weight:bold;
+}
+
+.container{
+width:95%;
+max-width:900px;
+margin:20px auto;
+}
+
+.card{
+background:white;
+padding:15px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
+
+iframe{
+width:100%;
+height:220px;
+border:none;
+border-radius:10px;
+}
+
+@media(min-width:768px){
+iframe{
+height:500px;
+}
+}
+
+h2{
+margin-top:15px;
+color:#1565C0;
+}
+
+p{
+margin-top:10px;
+color:#555;
+line-height:24px;
+}
+
+.btn{
+display:block;
+width:100%;
+padding:12px;
+margin-top:15px;
+background:#1565C0;
+color:white;
+text-align:center;
+text-decoration:none;
+border-radius:8px;
+font-weight:bold;
+}
+
+.back{
+background:#4CAF50;
+}
+
+.fullscreen{
+background:#E91E63;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+🎥 BKTech Video Player
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<iframe
+id="player"
+allowfullscreen>
+</iframe>
+
+<h2 id="title">Course Title</h2>
+
+<p id="desc">
+Course Description
+</p>
+
+<a id="pdfBtn" class="btn" target="_blank">
+📄 Download PDF Notes
+</a>
+
+<button class="btn fullscreen" onclick="fullscreenVideo()">
+📺 Full Screen
+</button>
+
+<a href="courses.html" class="btn back">
+⬅ Back to Courses
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+const params=new URLSearchParams(window.location.search);
+
+let video=params.get("video");
+let title=params.get("title");
+let desc=params.get("desc");
+let pdf=params.get("pdf");
+
+if(video){
+
+video=decodeURIComponent(video);
+
+video=video.replace("watch?v=","embed/");
+
+document.getElementById("player").src=video;
+
+}
+
+if(title){
+
+document.getElementById("title").innerHTML=decodeURIComponent(title);
+
+}
+
+if(desc){
+
+document.getElementById("desc").innerHTML=decodeURIComponent(desc);
+
+}
+
+if(pdf){
+
+document.getElementById("pdfBtn").href=decodeURIComponent(pdf);
+
+}else{
+
+document.getElementById("pdfBtn").style.display="none";
+
+}
+
+function fullscreenVideo(){
+
+let iframe=document.getElementById("player");
+
+if(iframe.requestFullscreen){
+
+iframe.requestFullscreen();
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Course - BKTech</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f5f5f5;
+}
+
+header{
+background:#1565C0;
+color:#fff;
+padding:18px;
+text-align:center;
+font-size:24px;
+font-weight:bold;
+}
+
+.container{
+width:90%;
+max-width:500px;
+margin:20px auto;
+background:#fff;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
+
+input,textarea{
+width:100%;
+padding:12px;
+margin-top:12px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:15px;
+background:#1565C0;
+color:white;
+border:none;
+border-radius:8px;
+font-size:18px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0D47A1;
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:15px;
+text-decoration:none;
+font-weight:bold;
+color:#1565C0;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+📚 Add New Course
+</header>
+
+<div class="container">
+
+<input type="text" id="courseName" placeholder="Course Name">
+
+<input type="text" id="courseImage" placeholder="Course Image URL">
+
+<input type="text" id="videoLink" placeholder="YouTube Video Link">
+
+<input type="text" id="pdfLink" placeholder="PDF Link">
+
+<textarea id="description" rows="4" placeholder="Course Description"></textarea>
+
+<button onclick="addCourse()">
+Add Course
+</button>
+
+<a href="admin.html" class="back">⬅ Back to Dashboard</a>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script src="firebase.js"></script>
+<script src="addcourse.js"></script>
+
+</body>
+</html>
