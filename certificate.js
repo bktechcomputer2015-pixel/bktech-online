@@ -1,51 +1,90 @@
-// Student Name LocalStorage se
-const studentName = localStorage.getItem("name") || "Student";
+auth.onAuthStateChanged(function(user){
 
-// Course Name (Default)
-const courseName = localStorage.getItem("course") || "Diploma in Computer Application (DCA)";
+if(!user){
+window.location.href="login.html";
+return;
+}
 
-// Aaj ki Date
-const today = new Date().toLocaleDateString("en-IN");
+db.collection("students").doc(user.uid).get()
+.then(function(studentDoc){
 
-// Page par data dikhaye
-document.getElementById("studentName").innerText = studentName;
-document.getElementById("courseName").innerText = courseName;
-document.getElementById("certificateDate").innerText = "Date: " + today;
+if(!studentDoc.exists){
+alert("Student not found");
+return;
+}
 
-// Certificate PDF Download
-function downloadCertificate() {
+const student = studentDoc.data();
 
-    const { jsPDF } = window.jspdf;
+db.collection("certificates").doc(user.uid).get()
 
-    const doc = new jsPDF("landscape");
+.then(function(certDoc){
 
-    // Title
-    doc.setFontSize(26);
-    doc.text("BKTech Computer & Library", 105, 30, { align: "center" });
+if(certDoc.exists){
 
-    doc.setFontSize(20);
-    doc.text("Certificate of Completion", 105, 50, { align: "center" });
+const cert = certDoc.data();
 
-    doc.setFontSize(14);
-    doc.text("This is to certify that", 105, 70, { align: "center" });
+if(cert.status==="Approved"){
 
-    // Student Name
-    doc.setFontSize(24);
-    doc.text(studentName, 105, 90, { align: "center" });
+document.getElementById("status").style.display="none";
 
-    doc.setFontSize(14);
-    doc.text("has successfully completed the course", 105, 110, { align: "center" });
+document.getElementById("certificate").style.display="block";
 
-    // Course Name
-    doc.setFontSize(18);
-    doc.text(courseName, 105, 130, { align: "center" });
+document.getElementById("downloadBtn").style.display="block";
 
-    doc.setFontSize(14);
-    doc.text("Date: " + today, 105, 150, { align: "center" });
+document.getElementById("studentName").innerHTML=student.name;
 
-    doc.setFontSize(12);
-    doc.text("Congratulations & Best Wishes!", 105, 170, { align: "center" });
+document.getElementById("courseName").innerHTML=cert.course;
 
-    // Save PDF
-    doc.save("BKTech_Certificate.pdf");
+document.getElementById("certificateDate").innerHTML=
+"Date : "+new Date(cert.date.seconds*1000).toLocaleDateString();
+
+}else{
+
+document.getElementById("status").innerHTML=
+"❌ Your Certificate is not approved yet.";
+
+}
+
+}else{
+
+document.getElementById("status").innerHTML=
+"❌ Certificate not available.";
+
+}
+
+});
+
+});
+
+});
+
+function downloadCertificate(){
+
+const { jsPDF } = window.jspdf;
+
+const doc = new jsPDF();
+
+doc.setFontSize(22);
+doc.text("BKTech Computer & Library",20,25);
+
+doc.setFontSize(18);
+doc.text("Certificate of Completion",45,45);
+
+doc.setFontSize(14);
+doc.text("This certifies that",20,70);
+
+doc.setFontSize(20);
+doc.text(document.getElementById("studentName").innerText,20,90);
+
+doc.setFontSize(14);
+doc.text("has successfully completed",20,110);
+
+doc.setFontSize(18);
+doc.text(document.getElementById("courseName").innerText,20,130);
+
+doc.setFontSize(14);
+doc.text(document.getElementById("certificateDate").innerText,20,155);
+
+doc.save("BKTech_Certificate.pdf");
+
 }
