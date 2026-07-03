@@ -1,4 +1,5 @@
 {
+  "id": "/",
   "name": "BKTech Online Classes",
   "short_name": "BKTech",
   "description": "BKTech Online Classes - Learn Anytime, Anywhere",
@@ -8,6 +9,9 @@
   "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#1565C0",
+  "categories": [
+    "education"
+  ],
   "icons": [
     {
       "src": "icon-192.png",
